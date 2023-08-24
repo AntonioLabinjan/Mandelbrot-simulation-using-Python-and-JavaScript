@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<canvas id="gardun" width="1000" height="1000"></canvas>
+<script>
+var m = document.getElementById("gardun").getContext("2d");
+
+function atom(x, y, c) {
+    m.fillStyle = c;
+    m.fillRect(x, y, 1, 1); 
+}
+
+for (var y = 0; y < 1000; y++) {
+    for (var x = 0; x < 1000; x++) {
+        var dx = (x - 500) / 2000 - 0.12;
+        var dy = (y - 500) / 2000 - 0.82;
+        var a = dx;
+        var b = dy;
+        var t;
+
+        for (t = 0; t < 200; t++) {
+            var tempA = a; 
+            var tempB = b;
+            a = (tempA * tempA) - (tempB * tempB) + dx;
+            b = 2 * (tempA * tempB) + dy;
+            var d = (a * a) + (b * b); 
+            if (d > 200) {
+                atom(x, y, "rgb(" + t * 3 + ", " + t + "," + t * 0.5 + ")");
+                break;
+            }
+        }
+    }
+}
+</script>
+</body>
+</html>
